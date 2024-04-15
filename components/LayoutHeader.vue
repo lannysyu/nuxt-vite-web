@@ -10,6 +10,7 @@ const handleLogout = () => {
         userInfo.value = null
     })
 }
+
 </script>
 
 <template>
