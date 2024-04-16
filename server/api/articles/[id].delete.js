@@ -2,7 +2,16 @@
 import { pool } from '@/server/utils/db'
 
 export default defineEventHandler(async (event) => {
-  // 使用 getRouterParam 取得 id 參數做為文章 id
+
+    // 驗證權限，檢查是否有 context，且 id 不為 1
+    if (event.context?.auth?.user?.id !== 1) {
+        throw createError({
+            statusCode: 401,
+            message: '沒有權限'
+        })
+    }
+
+    // 使用 getRouterParam 取得 id 參數做為文章 id
     const articleId = getRouterParam(event, 'id')
 
     const result = await pool

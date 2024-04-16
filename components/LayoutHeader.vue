@@ -1,6 +1,18 @@
 <script setup>
 // 呼叫 whoami api 獲取登入者資料
-const { data: userInfo } = await useFetch('/api/whoami')
+const { data } = await useFetch('/api/whoami')
+// 使用 useState 組合式函式，建立一個以 userInfo 作為 key 的 userInfo 狀態
+const userInfo = useState('userInfo')
+
+watch(
+    data,
+    (newData) => {
+        userInfo.value = newData
+    },
+    {
+        immediate: true
+    }
+)
 
 // 串接登出 API
 const handleLogout = () => {
@@ -8,6 +20,7 @@ const handleLogout = () => {
         method: 'DELETE'
     }).then(() => {
         userInfo.value = null
+        navigateTo('/')
     })
 }
 
@@ -65,6 +78,7 @@ const handleLogout = () => {
                         <div class="group/menu-item px-1 py-1">
                             <NuxtLink
                                 class="flex w-full items-center rounded-md px-2 py-2 text-sm group-hover/menu-item:bg-emerald-500 group-hover/menu-item:text-white"
+                                to="/articles/create"
                             >
                                 <Icon
                                     class="mr-2 h-5 w-5 text-emerald-400 group-hover/menu-item:text-white"

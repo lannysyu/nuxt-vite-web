@@ -4,6 +4,14 @@ import { pool } from '@/server/utils/db'
 
 export default defineEventHandler(async (event) => {
 
+    // 驗證權限，檢查是否有 context，且 id 不為 1
+    if (event.context?.auth?.user?.id !== 1) {
+        throw createError({
+            statusCode: 401,
+            message: '沒有權限'
+        })
+    }
+
     // 用 readBody 解析 body
     const body = await readBody(event)
 
