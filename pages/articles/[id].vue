@@ -52,7 +52,7 @@ const handleDeleteArticle = () => {
                     </time>
                     <div
                         v-if="userInfo?.id === 1"
-                        class="flex-rowx flex gap-3"
+                        class="flex-row flex gap-3"
                     >
                         <NuxtLink
                             class="flex items-center text-sm text-gray-400 hover:font-semibold hover:text-emerald-500"
