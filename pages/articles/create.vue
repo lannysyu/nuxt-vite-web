@@ -28,7 +28,7 @@ const handleSubmit = async () => {
 }
 
 // 添加中間件發送 whoami api 請求驗證使用者 id，不通過時在輸入路徑後重新導向首頁
-difinePageMeta({
+definePageMeta({
     middleware: 'auth'
 })
 
